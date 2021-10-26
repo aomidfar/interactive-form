@@ -30,7 +30,6 @@ color.disabled=true;
 
 const design = document.getElementById("shirt-designs");
 design.addEventListener('change', e=>{
-	console.log(e.target.value);
 	color.disabled=false;
 
 
@@ -38,7 +37,6 @@ design.addEventListener('change', e=>{
 
 				if(e.target.value===color.children[i].getAttribute('data-theme')){
 					color.children[i].hidden=false;
-					console.log(color.children[i]);
 					color.children[i].setAttribute('selected', true);
 				}else{
 					color.children[i].hidden=true;
@@ -48,11 +46,35 @@ design.addEventListener('change', e=>{
 
 		}
 
-		
+// set the total cost for activities so it updates via checking and unchecking different courses
+
+const activitiesBox = document.getElementById("activities-box");
+activitiesBox.addEventListener('change', e=>{
+
+	var input= document.querySelectorAll('checkbox');
+	//var clickedType = document.getAttribute('data-cost');		
+	let activitiesCost = document.getElementById('activities-cost');
+	activitiesCost.innerText='';
+	let updatedCost = 0;
+	let inputCheckbox = document.querySelectorAll('#activities-box input[type="checkbox"]');
+	let counter=0;
+		for (let i=0; i < inputCheckbox.length; i++ ){
+
+		if(inputCheckbox[i].checked){
+
+			updatedCost += parseInt(inputCheckbox[i].getAttribute('data-cost'));
+			counter +=1;
+			activitiesCost.innerText = `Total: $${updatedCost}`;
+		}	else if(counter===0	){
+			activitiesCost.innerText = 'Total: $0';
+			}
 		
 
-	
-	
+		
+			
 
+console.log(activitiesCost);
+
+};
+});
 })
-
