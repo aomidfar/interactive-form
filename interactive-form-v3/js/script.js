@@ -44,15 +44,14 @@ design.addEventListener('change', e=>{
 					//console.log(color.children[1]);
 				}
 
-		}
+		}});
 
 // set the total cost for activities so it updates via checking and unchecking different courses
 
 const activitiesBox = document.getElementById("activities-box");
 activitiesBox.addEventListener('change', e=>{
 
-	var input= document.querySelectorAll('checkbox');
-	//var clickedType = document.getAttribute('data-cost');		
+	var input= document.querySelectorAll('checkbox');	
 	let activitiesCost = document.getElementById('activities-cost');
 	activitiesCost.innerText='';
 	let updatedCost = 0;
@@ -68,13 +67,40 @@ activitiesBox.addEventListener('change', e=>{
 		}	else if(counter===0	){
 			activitiesCost.innerText = 'Total: $0';
 			}
-		
 
-		
-			
-
-console.log(activitiesCost);
-
-};
+}
 });
+
+//Payment info section. Set the credit card as the default form of payment and hide everything execpt CC info
+
+let payments = document.getElementById('payment');
+const creditCard = document.getElementById('credit-card');
+const paypal = document.getElementById('paypal');
+const bitcoin = document.getElementById('bitcoin');
+payments.children[1].setAttribute('selected', true);
+paypal.style.display='none';
+bitcoin.style.display='none';
+
+//display only the selected form of payment and hide the rest via event listener
+
+payments.addEventListener('change', e=>{
+	
+	let selectedPaymentOption = e.target.value;
+
+	if(selectedPaymentOption==='credit-card'){
+		creditCard.style.display='block';
+		paypal.style.display='none';
+		bitcoin.style.display='none';
+
+	}else if (selectedPaymentOption==='paypal'){
+		creditCard.style.display='none';
+		paypal.style.display='block';
+		bitcoin.style.display='none';
+
+	}else if (selectedPaymentOption==='bitcoin'){
+		creditCard.style.display='none';
+		paypal.style.display='none';
+		bitcoin.style.display='block';
+	}
 })
+
